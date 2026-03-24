@@ -1,0 +1,1135 @@
+DESIGN DOCUMENT
+Profit-First Ad Manager (PFAM)
+UI/UX Design System · Screen Specifications · Interaction Patterns · System Design Version 1.0 | February 2026 | Confidential
+Field
+Value
+Product
+Profit-First Ad Manager (PFAM)
+Document Type
+Design Document — UI/UX & System Design
+Version
+1.0
+Authors
+Product Design, Engineering Lead
+Status
+Draft — In Review
+Covers
+Design System, All Core Screens, Interactions, Responsive, Accessibility
+1. Design Introduction1. Design Introduction
+1. Design Introduction
+1. Design Introduction
+Purpose of This Document
+This Design Document is the single source of truth for all visual and interaction design decisions for PFAM. It covers the design system (tokens, typography, color, components), screen-by-screen UX specifications, key interaction patterns, data visualization guidelines, and accessibility requirements. Engineers, designers, and QA should reference this document when building or reviewing any front-end element.
+Design Goals
+Simplicity Over Features
+Every screen must be understood by a non- technical founder in 5 seconds.
+Complexity is hidden under progressive
+disclosure.
+Default views show only what is needed to
+make a decision.
+Advanced options are accessible but never in
+the way.
+Profit as the Primary Signal
+Net profit is the dominant visual element on
+every screen.
+ROAS and revenue are shown for context,
+never as primary.
+Red/amber/green is the universal language
+— no legend needed.
+Numbers are secondary to directional signals.
+Trust Through Transparency
+Every number shows how it was calculated.
+Confidence levels are visible, not hidden.
+Every automated action shows its reason.
+Undo is always one click away.
+Speed as a Feature
+Dashboard load < 2.5 seconds always.
+Actions feel instant with optimistic UI updates.
+Onboarding never blocks — show partial data early.
+Mobile must feel as fast as desktop.
+Design Principles (Hierarchy)
+#
+Principle
+Rationale
+When in Conflict…
+1
+Clarity over Cleverness
+A founder at 7am on a phone needs instant comprehension.
+Always choose the simpler pattern even if less aesthetically interesting.
+2
+Accuracy over Completeness
+A wrong number is worse than a missing one.
+Show confidence levels rather than filling gaps with estimates.
+#
+Principle
+Rationale
+When in Conflict…
+3
+Action over Insight
+PFAM must help users do something, not just know something.
+Prioritize CTA placement over chart real estate.
+4
+Consistency over Novelty
+Patterns learned once should work everywhere.
+Reuse existing components rather than inventing new ones.
+5
+Mobile Parity over Mobile First
+Desktop is primary; mobile is equally important, not an afterthought.
+Design desktop first; mobile must have feature parity, not reduced features.
+2. Design System2. Design System
+2. Design System
+2. Design System
+Color System
+PFAM uses a two-track color system: a Neutral Track for structural UI (backgrounds, borders, text) and a Semantic Track for conveying meaning (profit status, confidence levels, actions). Semantic colors must never be used purely decoratively.
+Brand Colors
+Indigo-900
+#312E81
+Indigo-600
+#4F46E5
+Indigo-500
+#6366F1
+Indigo-300
+#A5B4FC
+Indigo-100
+#E0E7FF
+Indigo-50
+#EEF2FF
+Semantic Colors — Profit Status
+Profitable
+#059669
+Profit-bg
+#D1FAE5
+Borderline
+#D97706
+Amber-bg
+#FEF3C7
+Loss
+#DC2626
+Loss-bg
+#FEE2E2
+Neutral Scale
+Gray-900
+#111827
+Gray-700
+#374151
+Gray-500
+#6B7280
+Gray-300
+#D1D5DB
+Gray-100
+#F3F4F6
+White
+#FFFFFF
+Token Name
+Value
+Usage
+color.background.base
+#FFFFFF
+Page background, card backgrounds
+color.background.subtle
+#F8FAFC
+Table row alt, sidebar bg, input bg
+color.background.muted
+#F3F4F6
+Skeleton loaders, disabled state bg
+color.border.default
+#E5E7EB
+Default borders, table dividers
+color.border.focus
+#6366F1
+Input focus ring, selected state
+color.text.primary
+#111827
+Headings, primary content
+color.text.secondary
+#6B7280
+Labels, captions, helper text
+color.text.disabled
+#D1D5DB
+Disabled inputs, placeholder text
+color.brand.primary
+#312E81
+Nav, primary buttons, banner backgrounds
+Token Name
+Value
+Usage
+color.brand.accent
+#6366F1
+Links, active states, secondary buttons
+color.profit.positive
+#059669
+Positive profit numbers, success states
+color.profit.negative
+#DC2626
+Negative profit numbers, destructive actions
+color.profit.neutral
+#D97706
+Near-zero profit, warning states
+Typography
+Style
+Font
+Weight
+Size
+Line Height
+Usage
+Display
+Inter
+700 / Bold
+32px / 64px tw
+1.2
+Hero headlines on marketing pages
+H1
+Inter
+700 / Bold
+28px / 56px tw
+1.3
+Page titles, section headers
+H2
+Inter
+600 /
+SemiBold
+22px / 44px tw
+1.4
+Sub-section headers, card titles
+H3
+Inter
+600 /
+SemiBold
+18px / 36px tw
+1.4
+Column headers, group labels
+Body / Default
+Inter
+400 /
+Regular
+14px / 28px tw
+1.6
+Primary body copy, descriptions
+Body Strong
+Inter
+500 /
+Medium
+14px / 28px tw
+1.6
+Emphasized body text, labels
+Body Small
+Inter
+400 /
+Regular
+13px / 26px tw
+1.5
+Helper text, captions, metadata
+Mono / Code
+JetBrains Mono
+400
+13px
+1.5
+API keys, IDs, technical values, click IDs
+Data / Metric
+Inter
+700 / Bold
+24–36px
+1.1
+Profit values, KPI numbers in dashboard cards
+Badge / Tag
+Inter
+500 /
+Medium
+12px
+1
+Status badges, tags, table chips
+Typography Rule: Monetary values (Net Profit, Spend, Revenue) always use the "Data/Metric" style with the Semantic color (green/red/amber). Never display a financial metric in a neutral color — the color IS the primary communication.
+Spacing & Layout System
+PFAM uses an 8px base grid. All spacing values are multiples of 4px. The application uses a fixed left sidebar navigation with a fluid main content area.
+Token
+Value
+Common Usage
+space-1
+4px
+Icon padding, dense table row padding
+space-2
+8px
+Chip padding, badge padding
+space-3
+12px
+Input padding vertical, small card padding
+space-4
+16px
+Standard component padding, section gap
+space-6
+24px
+Card padding, sidebar item padding
+space-8
+32px
+Section separation, page header padding
+space-12
+48px
+Major section breaks
+space-16
+64px
+Page-level top/bottom padding
+radius-sm
+4px
+Buttons, badges, small chips
+radius-md
+8px
+Cards, dropdowns, popovers
+radius-lg
+12px
+Modal dialogs, large panels
+radius-xl
+16px
+Feature cards, onboarding panels
+shadow-sm
+0 1px 3px rgba(0,0,0,0.08)
+Table rows on hover, secondary cards
+shadow-md
+0 4px 12px rgba(0,0,0,0.1)
+Dropdowns, popovers, floating toolbars
+shadow-lg
+0 8px 32px rgba(0,0,0,0.12)
+Modals, dialogs, side sheets
+Grid System
+Breakpoint
+Min Width
+Layout
+Sidebar
+Content Width
+Notes
+Mobile (sm)
+< 640px
+Single column, no sidebar
+Hidden (hamburger)
+100vw
+Full-width, bottom tab nav
+Tablet (md)
+640–
+1024px
+Single column
++ sidebar
+Collapsed (icon-only, 64px)
+calc(100vw - 64px)
+Hover to expand sidebar
+Desktop (lg)
+1024–
+1440px
+Fixed sidebar + fluid content
+Expanded (240px)
+calc(100vw - 240px)
+Standard layout
+Wide (xl)
+> 1440px
+Fixed sidebar + max-width content
+Expanded (240px)
+Max 1200px centered
+Content caps at 1200px
+Core Component Library
+Buttons
+Variant
+Visual Description
+Use Case
+Disabled State
+Primary
+Solid indigo bg (#4F46E5), white text, 8px radius, 40px height
+Primary action on a screen (1 per view)
+50% opacity, not-allowed cursor, no hover effect
+Secondary
+White bg, indigo border, indigo text
+Secondary actions, cancel
+50% opacity, muted border
+Destructive
+Solid red bg (#DC2626), white text
+Delete, remove, disconnect actions
+50% opacity, not-allowed cursor
+Ghost
+No bg, indigo text, hover shows light bg
+Tertiary actions, table row actions
+50% opacity, no hover
+Icon Button
+Square (40×40px), ghost style with icon
+Toolbar icons, table row controls
+50% opacity
+Loading State
+Primary + spinner replacing label text
+When async action is in flight
+N/A — shown instead of active
+Status Badges
+▲ Profitable
+Net Profit > 0
+Borderline
+Profit -10% to 0
+▼ Loss
+Net Profit < -10%
+No Data
+Insufficient orders
+⏸ Paused Auto or manually paused
+Confidence Indicators
+Level
+Label
+Score Range
+Color
+Attribution Tier
+Visual
+High
+High Confidence
+0.85–1.0
+Green (#059669)
+Tier 1–2 (Click ID / Conversion ID)
+Solid green dot
+Medium
+Medium Confidence
+0.60–0.84
+Amber (#D97706)
+Tier 3–4 (SKU-
+weighted / Blended)
+Amber dot
+Low
+Low Confidence
+< 0.60
+Gray (#9CA3AF)
+Tier 5 (ML predicted) or insufficient data
+Gray dot with warning
+Insufficient
+No Attribution
+< 10
+orders
+Red outline
+Cannot attribute yet
+Striped indicator
+Metric Cards (KPI Tiles)
+Metric Card Specification
+Metric cards appear in rows of 4 across the Account Overview dashboard. Each card is 220px wide (fluid on narrow screens), 96px tall, with 16px padding. Structure: [Label text (Body Small, Gray-500)] → [Value (Data/Metric style, semantic color)] → [Delta row: delta arrow + percentage vs previous period (Body Small)]. Cards have a 1px border, 8px radius, white bg, subtle shadow. Hovering a card highlights it and reveals a tooltip showing the exact calculation formula (e.g., "Net Profit = Revenue - Spend - COGS - Returns - Fees").
+Data Tables
+Property
+Specification
+Row height
+48px (default) / 40px (compact mode)
+Column header
+Gray-50 bg, Body Strong style, sort icon on hover (all columns), active sort shows arrow
+Row hover
+Highlight with indigo-50 bg, show row action buttons (icons)
+Selected row
+Indigo-100 bg, left border 3px indigo
+Profit column
+Always pinned as first data column after name. Font is Data/Metric style with semantic color.
+Pagination
+Bottom of table: showing "X–Y of Z results", page size selector (10/25/50/100), previous/next
+Empty state
+Centered illustration + headline + description + CTA button. No blank whitespace.
+Property
+Specification
+Loading state
+Skeleton rows (gray gradient animation) matching table structure
+Frozen columns
+Campaign Name always frozen-left on horizontal scroll
+3. Screen Specifications3. Screen Specifications
+3. Screen Specifications
+3. Screen Specifications
+Global Navigation
+The left sidebar is the primary navigation. It uses a 240px expanded state with icon + label, and collapses to 64px on tablet with icon only. On mobile, it becomes a bottom tab bar with the 5 primary destinations.
+Nav Item
+Icon
+Route
+Badge / Indicator
+Overview
+Bar chart icon
+/dashboard
+Unread alerts count
+Campaigns
+Target icon
+/campaigns
+Active automation count
+Products
+Box icon
+/products
+—
+Automation
+Lightning bolt
+/automation
+Paused today count
+Reports
+Download icon
+/reports
+—
+Settings
+Gear icon
+/settings
+Setup incomplete dot
+Account
+User avatar
+Bottom of sidebar
+Billing status warning
+Top Bar (12px height, fixed)
+Left: Breadcrumb trail (e.g., Campaigns > Meta > Campaign Name). Center: Date Range Selector (persistent, affects all views). Right: [Sync Status chip] [Notifications bell with unread count] [Help icon] [User avatar + org name dropdown]. The date range selector is a persistent global state that applies to all dashboard views. Changing the date range should update all visible metrics within 300ms via cached data.
+Onboarding Flow
+The onboarding flow is a 5-step wizard displayed as a centered modal overlay on first login. It is resumable — users can skip to dashboard at any step and the wizard re-appears on next login until completion.
+Step
+Screen Title
+User Action
+Success State
+Skip Allowed?
+1 of
+5
+Connect your Shopify store
+Click "Connect Shopify"
+→ OAuth redirect →
+return
+Green checkmark + store name + order count shown
+Yes, skip adds yellow warning banner
+2 of
+5
+Connect your ad accounts
+Click Meta button → OAuth. Then optionally Google.
+Platform tiles show "Connected" with account name
+Yes, but dashboard will show limited data
+3 of
+5
+Configure your COGS
+Select method: Shopify import / CSV upload / % estimate
+COGS confidence badge shown (High/Medium/Low)
+Yes — profit accuracy reduced, shown in warning
+4 of
+5
+Set up your first rule
+Pre-fill template: "Pause if 7-day profit < $0 AND orders > 10"
+Rule card shows "Draft
+— ready to activate"
+Yes — encouraged to do this in Day 2
+5 of
+5
+You're ready!
+Click "Go to Dashboard" or "Activate Rule Now"
+Confetti animation, checklist shows 5/5 complete
+N/A — final step
+Onboarding Progress Persistence
+Onboarding state is saved server-side per user. If the user refreshes or closes the browser mid- flow, the wizard reopens at the last incomplete step. The top navigation shows an "Onboarding: 3/5 complete" chip until all 5 steps are done. After completion, the chip disappears permanently.
+Account Overview Dashboard
+Account Overview
+/dashboard — The morning dashboard. CEO-friendly. 5-second comprehension.
+ZONE A — KPI Row (full width, 4 cards)
+Card 1: Total Net Profit (period) — [Large number, semantic color] [Delta vs prior period] [Spark line] Card 2: Total Ad Spend — [Number, gray] [Delta] [Trend]
+Card 3: Blended Net Profit Margin % — [Percentage, semantic color] [Delta] Card 4: Campaigns Paused Today (by automation) — [Count, blue] [View All link]
+ZONE B — Platform Tiles (3 side-by-side)
+One tile per connected platform (Meta, Google, TikTok)
+Each tile: Platform logo | Spend | Revenue | Net Profit | Profit % | Status chip
+Click any tile → drills into that platform's campaign view
+Unconnected platforms show a "+ Connect" tile (lighter style)
+ZONE C — Campaign Health Heatmap (full width)
+Visual grid showing all campaigns as colored tiles sized by spend Green = profitable, Amber = borderline, Red = loss, Gray = paused
+Hover: tooltip with Campaign name, 7-day net profit, last action Click: navigates to campaign detail
+ZONE D — Automation Activity Feed (right sidebar panel) Timeline of last 10 automated actions (reverse chronological) Each entry: [Action icon] [Campaign name] [Action] [Time ago]
+Entry example: ⏸ "Summer Sale — US" paused • 2 hrs ago • Undo View All link → navigates to Automation log
+ZONE E — Sync Status Bar (bottom, sticky)
+Last synced: "Meta: 47 min ago | Google: 1hr 12min ago | Shopify: 23 min ago" If any sync is stale (> 2hrs): amber chip with warning icon
+Sync Now button (rate-limited to once per 5 minutes)
+Fig 3.3 — Account Overview Dashboard layout. Zones A–D are always visible on desktop. Zone E is sticky at the bottom.
+Campaign View
+Campaign Dashboard
+/campaigns — The performance marketer's control center. Sortable by profit, filterable by platform.
+ZONE A — View Controls (toolbar)
+Left: Platform filter pills (All | Meta | Google | TikTok)
+Left: Status filter (All | Active | Paused | Borderline | Loss) Left: Attribution confidence filter (All | High | Medium | Low)
+Right: Columns selector (show/hide columns) | Compact/Default toggle | Export CSV | Export PDF Right: Saved Views dropdown + Save Current View button
+ZONE B — Summary Row (sticky sub-header)
+Aggregated totals row across all filtered campaigns
+Columns: Total Spend | Total Revenue | Total COGS | Total Returns | Total Net Profit | Blended Margin
+Shows "(123 campaigns)" count
+ZONE C — Campaign Table (primary content)
+Columns: [Profit Status badge] [Platform icon] [Campaign Name (frozen)] [Spend] [Revenue] [COGS] [Returns] [Fees] [Net Profit $] [Net Profit %] [True ROAS] [Attr. Confidence] [Orders] [Status] [Actions] Default sort: Net Profit ascending (worst performers first)
+Net Profit column: colored number + background tint (green/amber/red) Attribution Confidence column: dot indicator + tier label
+Actions column: [View details] [⏸ Pause] [▶ Resume] [+ Add Rule] icons
+Row expansion: click chevron → shows ad set breakdown inline
+ZONE D — Right Panel (slide-in on row click)
+Opened by clicking campaign row (not action buttons)
+Shows: Profit breakdown chart | Attribution breakdown | 7/14/30-day trend Tabs: Overview | Ad Sets | Attribution | Rules | Audit Log
+Close button (X) or click outside to dismiss
+Fig 3.4 — Campaign View. Right panel slides in on row click. Sort by net profit is the default — worst performers surface immediately.
+Profit Breakdown Panel
+When a user opens the right panel for a campaign, the Profit Breakdown tab shows a stacked horizontal bar chart breaking down how each cost component reduces revenue to net profit. Structure:
+Full width = Attributed Revenue (100% = baseline)
+Segments: Revenue → [minus] Ad Spend → [minus] COGS → [minus] Estimated Returns → [minus] Fees → [equals] Net Profit
+Each segment is color-coded: Revenue (blue), Spend (red), COGS (orange), Returns (amber), Fees (gray), Net Profit (green or red)
+Hovering a segment shows: label, absolute value ($), percentage of revenue
+Below the chart: a text summary: "For every $100 of revenue, $38.20 is net profit after all costs."
+Attribution Inspector Panel
+Accessible via the Attribution tab in the right panel. This view is for power users (Priya persona) who need to audit attribution decisions.
+Component
+Description
+Attribution Summary Card
+Attribution method breakdown: % of orders via Tier 1, Tier 2, Tier 3, Tier 4, Tier 5. Bar chart.
+Coverage Rate
+Large number: "74.3% of orders attributed" with amber/green/red semantic color based on threshold.
+Confidence Distribution
+Histogram showing distribution of confidence scores across attributed orders.
+Order-Level Table
+Paginated table: Order ID | Date | Amount | SKU(s) | Attribution Tier | Confidence | Match Method | Click ID (truncated)
+Override Controls
+Button: "Whitelist this campaign from automation" | "Adjust attribution window for this campaign"
+Unmatched Orders
+Accordion showing unmatched orders with possible reasons (missing UTM, direct traffic, etc.)
+Automation Rules Builder
+Automation Rules
+/automation — Rule list and builder. Designed for a founder to set up in 3 minutes.
+ZONE A — Rules List
+Table of all rules: Rule Name | Platform | Scope | Conditions Summary | Action | Status (toggle) | Created | Last Triggered
+Status toggle: large ON/OFF pill toggle — OFF = Draft (gray), ON = Active (green)
+Rules sorted by: Active first, then by last triggered date "+ Create Rule" primary button top-right
+Empty state: template gallery showing 6 pre-built rule templates
+ZONE B — Rule Detail Side Panel (on row click)
+Rule name (editable inline)
+Full condition display in plain English: "When [7-day rolling net profit] is [less than] [$0] AND [orders attributed] are [more than] [15]"
+Action display: "Then pause this ad set" Guardrails summary, notification channels
+Execution history: Last 10 triggers with timestamp + metric values Buttons: Edit | Duplicate | Delete | Backtest
+Rule Builder UI
+Plain-English Rule Construction
+The rule builder uses a structured form that reads like a sentence. It never exposes raw fields. The sentence template is: "IF [metric] [operator] [value] AND/OR [metric] [operator] [value]... THEN [action] WHEN [guardrail conditions are met]." Each part of the sentence is a dropdown or number input styled as an inline element within the sentence text. The user feels like they are writing a rule in plain English, not configuring a form.
+Field
+Type
+Options / Constraints
+Platform
+Dropdown
+Meta Ads / Google Ads / TikTok Ads (if connected)
+Scope
+Dropdown
+Account / Campaign / Ad Set (most common) / Ad
+Rolling Window
+Dropdown
+Last 1 day / Last 3 days / Last 7 days / Last 14 days / Last 30 days
+Metric
+Dropdown
+Net Profit ($) / Net Profit Margin (%) / ROAS / Ad Spend / Return Cost ($) / Return Rate (%)
+Operator
+Dropdown
+is less than / is greater than / is less than or equal to / is greater than or equal to
+Value
+Number input
+Validated for type ($ for monetary, % for margin, decimal for ROAS)
+Field
+Type
+Options / Constraints
+Compound Logic
+Toggle
+AND / OR (max 5 conditions per rule)
+Action
+Dropdown
+Pause entity / Reduce daily budget by X% / Increase daily budget by X% / Alert only (no API action)
+Min Orders Guardrail
+Number input
+Default: 10. Min: 5. Tooltip: "Rule won't fire until this many orders are attributed."
+Min Spend Guardrail
+Number input
+Default: $50. Tooltip: "Rule won't fire until this much has been spent."
+Max Actions/Day
+Number input
+Default: 10 per ad account. Prevents runaway automation.
+Notification
+Multi-select
+Email / Slack / Webhook / None
+Rule Name
+Text input
+Auto-suggested: "Pause unprofitable ad sets (7-day)"
+Backtest Feature
+Before activating a rule, users can click "Preview against history." This triggers a non-blocking background job that evaluates the rule against the last 30 days of data and returns: How many times would this rule have fired? Which specific ad sets would have been paused? What would the estimated profit impact have been? Results are displayed as a table and a timeline chart directly below the rule builder within 15–30 seconds.
+Product Profitability View
+Product Profitability
+/products — SKU-level profit view. The finance manager's view.
+ZONE A — Filters & Controls
+Filters: Product Category | Min Revenue | Attribution confidence threshold Toggle: "Show only SKUs with missing COGS" (helps Finance fix data gaps) Export: CSV with all SKU-level profit data
+ZONE B — Product Table
+Columns: [Product Image thumbnail] [Product/SKU Name] [Category] [Units Sold] [Revenue] [COGS] [COGS Source badge] [Return Rate] [Return Cost] [Net Margin %] [Campaigns featuring this SKU (count)]
+Expandable row: click to see all campaigns that drove sales of this SKU
+SKUs with missing COGS show amber badge "No COGS" with "Set COGS" action link COGS Source badge: "Shopify" (green) | "CSV" (blue) | "Estimate" (amber)
+ZONE C — SKU Profit Trends Panel (right side panel)
+30-day line chart of Net Margin % for this SKU
+Return rate trend: actual returns by week with 180-day rolling average line Top campaigns driving revenue for this SKU (table)
+COGS History: versioned list of past COGS values with who changed them and when
+Reports & Exports
+Report Type
+Format
+Contents
+Use Case
+Generation Time
+Campaign Profit Export
+CSV
+Per-campaign per-day: spend, revenue, COGS, returns, fees, net profit, orders, attribution coverage
+Finance reconciliation, month-end close
+< 30 seconds
+Account Summary Report
+PDF
+Charts: profit trend, platform breakdown, top/bottom campaigns. Executive summary paragraph.
+Board / investor reporting, client reports
+< 60 seconds
+Attribution Detail Export
+CSV
+Per-order: order ID, campaign, ad set, attribution tier, confidence, revenue, COGS, returns
+Attribution audit, engineering debugging
+< 60 seconds
+Automation Activity Report
+PDF
+All automated actions in period: rule name, entity, action, metric values, timestamps
+Compliance, brand safety review
+< 30 seconds
+COGS
+Reconciliation Report
+CSV
+Per-SKU: COGS source, value, return rate, units sold, estimated vs actual returns
+Finance team COGS audit, accounting reconciliation
+< 30 seconds
+PDF Report Design
+PDF reports use a consistent PFAM-branded template: indigo header with date range and org name, page numbers, summary KPI tiles on page 1, charts on pages 2–3, data tables on remaining pages. Charts are embedded as SVG-to-rasterized PNG. Reports generated server- side using Puppeteer + Handlebars and stored in S3 with a 15-minute signed URL for download. The download link appears in the UI and is emailed to the user.
+Settings
+Settings Section
+Key Contents
+Connectors
+Platform connection status, OAuth re-connect, sync schedule (daily/hourly), manual sync, sync logs, disconnect
+COGS & Returns
+Per-SKU or category COGS configuration, CSV import tool, return rate overrides, COGS history log
+Automation Defaults
+Default guardrail values (min orders, min spend, max actions/day), global automation pause toggle, whitelist management
+Notifications
+Channel setup (email preferences, Slack workspace connection, webhook endpoint + secret), notification type toggles, digest schedule
+Team & Permissions
+Invite user, manage roles, view active sessions, revoke access, pending invitations
+Billing
+Current plan + usage meter (ad spend this month vs limit), upgrade/downgrade (Stripe Portal), invoice history, annual billing toggle
+Organization
+Org name, base currency, time zone, data region (US/EU), attribution window (1/7/14/30-day default)
+Developer
+API token management (generate, scope, revoke), API documentation link, webhook delivery log, rate limit status
+Security
+MFA setup/management, active sessions, login history, password change, session revocation
+4. Interaction Patterns4. Interaction Patterns
+4. Interaction Patterns
+4. Interaction Patterns
+Optimistic UI Updates
+To make the product feel fast, all write actions (toggle rule on/off, manual pause, undo action) use optimistic UI: the UI updates immediately before the API call completes. If the API call fails, the UI reverts with an error toast. This applies to:
+Rule activation toggle: ON/OFF state changes immediately; reverts if API fails.
+Manual campaign pause: Row status changes to "Paused" immediately.
+Undo automated action: Action removed from feed immediately; API call runs in background.
+COGS value update: New value shown immediately; historical recalculation shown as
+"Recalculating…" state.
+Progressive Data Loading
+When a user opens the dashboard after a sync is in progress, data loads progressively rather than blocking on a full-page loader:
+KPI cards load first (from cache) with a "Updating…" badge if a new sync is in progress.
+Campaign table loads with cached data (previous sync) immediately. New sync results update in place when ready.
+Right-side detail panels load fresh (no cache) when opened.
+Attribution data loads asynchronously — a spinner in the Attribution column until complete.
+Date Range Changes
+The global date range selector is persistent in the top bar. Changing the date range triggers:
+Immediate skeleton state on all KPI cards and the campaign table.
+API calls fired in parallel for all visible data components.
+Components render as soon as their data resolves (not waiting for all to complete).
+Previously selected date range saved in URL (e.g., ?range=7d) for shareable links.
+Automated Action Flow (User Notification)
+When an automation rule fires, the user is notified through multiple channels in a defined sequence:
+Step
+Trigger
+Channel
+Delay
+User Action Required?
+1
+Rule fires (system)
+In-app notification badge increments
+Immediate
+No
+2
+Action executed
+Slack message (if configured)
+< 5 minutes
+No
+Step
+Trigger
+Channel
+Delay
+User Action Required?
+3
+Action executed
+Email notification (if configured)
+< 5 minutes
+No
+4
+User opens app
+Activity feed shows new entry with Undo button
+On login
+Optional: Undo
+5
+8 hours pass
+Daily digest email (if digest mode enabled)
+Batched 8am
+No
+6
+User reviews
+Can undo from app, email link, or Slack button
+Up to 24h
+Optional
+Empty States
+Empty states are critical — a blank screen loses users. Every empty state must answer: Why is this empty? What should I do about it?
+Screen / State
+Illustration Concept
+Headline
+Sub-text
+Primary CTA
+No platforms connected
+Unplugged cable illustration
+No data yet
+Connect your Shopify store and ad accounts to see your true profit.
+Connect Shopify
+No campaigns in date range
+Empty calendar illustration
+No campaigns found for this period
+Try expanding your date range or check your platform connection.
+Change Date Range
+No automation rules
+Robot sleeping illustration
+Your ads are flying blind
+Create your first rule to automatically pause unprofitable campaigns.
+Create Your First Rule
+No reports generated
+Empty folder illustration
+No reports yet
+Export your first profit report to share with your team or accountant.
+Export Profit Report
+Low attribution coverage
+Broken magnifying glass
+Attribution data is sparse
+PFAM needs more data to attribute accurately. You'll see better results after 14 days of operation.
+Learn about Attribution
+Error Handling
+Error Type
+Display Location
+Message Pattern
+Recovery Action
+Platform API failure
+Connector status bar (amber chip)
+Meta Ads sync failed. We'll retry automatically in 15 minutes.
+Sync Now button
+Automation action failed
+Activity feed entry + email
+Pause failed for "Campaign X" on Meta. Retrying (1 of 3).
+View details link
+Attribution below threshold
+Dashboard warning banner (dismissible)
+Attribution coverage is 38%
+— below our recommended 60%.
+Attribution setup guide link
+Billing payment failed
+Top-of-app red banner
+Your payment failed. Features will pause in 7 days.
+Update billing link
+COGS data missing
+Metric tooltip + product table amber badge
+Net profit may be understated — COGS not configured for 14 SKUs.
+Configure COGS link
+Session expired
+Modal overlay
+Your session expired for security. Please sign in again.
+Sign in button
+Rate limit hit (user action)
+Inline error on button
+You've reached the sync limit. Try again in 4 minutes.
+Timer countdown
+5. Data Visualization Guidelines5. Data Visualization Guidelines
+5. Data Visualization Guidelines
+5. Data Visualization Guidelines
+Chart Principles
+Every chart must have a clear takeaway. If the chart doesn't tell a story, it doesn't ship.
+Profit-positive values always use green (#059669). Profit-negative always use red (#DC2626). No exceptions.
+Charts never use more than 4 data series at once. Additional series go behind a "show more" toggle.
+All charts have loading and empty states. No blank white rectangles.
+Tooltips on every data point: show exact value, date, and context (e.g., "7-day rolling net profit:
+$1,240 on Feb 10").
+Chart Types & Usage
+Chart Type
+Library
+Use Cases
+Key Config
+Line Chart
+Recharts
+<LineChart>
+Profit trend over time, spend vs revenue over time, rolling metric trends
+Smoothed curves (monotone), reference line at $0 for profit, filled area below zero = red fill
+Horizontal Stacked Bar
+Recharts
+<BarChart horizontal>
+Profit breakdown (Revenue → costs → Net Profit), COGS composition
+Each segment a different semantic color, hover shows segment value +
+% of total
+Grouped Bar Chart
+Recharts
+<BarChart>
+Platform comparison (Meta vs Google vs TikTok), week-over-week comparison
+Grouped by date, max 3 series, legend below chart
+Treemap
+D3 treemap
+Campaign health heatmap on Account Overview, spend distribution
+Cell size = spend, cell color = profit status (green/amber/red/gray)
+Scatter Plot
+Recharts
+<ScatterChart>
+Spend vs Net Profit (efficiency view), Confidence vs Profit (attribution quality)
+X = spend, Y = profit, dot size = orders, color = profit status
+Spark Lines
+Recharts miniaturized
+KPI card trends, table row micro-trends
+7-day trend, no axes, simple line, semantic color
+Donut Chart
+Recharts
+<PieChart>
+Attribution tier distribution, platform spend split
+Max 5 segments, legend with values, center label shows total
+Chart Type
+Library
+Use Cases
+Key Config
+Histogram
+Recharts
+<BarChart>
+Attribution confidence score distribution
+Bins of 0.1, semantic coloring (<0.6
+gray, 0.6–0.85 amber, >0.85 green)
+Profit Trend Chart — Detailed Specification
+The profit trend line chart is the most important visualization in the product. It appears on the Account Overview, Campaign detail panel, and the Ad Set view.
+Property
+Specification
+X Axis
+Date. Tick frequency: daily for ≤30 day range; weekly for >30 days.
+Y Axis
+Net Profit ($). Left axis: profit. Right axis (secondary, dashed): Ad Spend ($).
+Series 1
+Net Profit — solid line, semantic color (green where positive, red where negative). Area fill: 20% opacity matching line color.
+Series 2
+Ad Spend — dashed gray line, secondary Y axis. Always shown for context.
+Zero Line
+Solid horizontal reference line at y=0. Thick (2px), dark gray. Labeled "Break-even".
+Negative Area
+Below-zero area has a red 10% opacity fill to visually emphasize loss periods.
+Automated Actions
+Vertical dashed line on dates where a rule fired. Hover shows what action was taken.
+Tooltip
+Shows: Date, Net Profit, Ad Spend, Attributed Revenue, Attribution Coverage % for that day.
+Height
+240px on dashboard, 320px in detail panels, 160px for sparklines in table rows.
+Annotations
+If data confidence is low (< 40% coverage), show a gray hatched overlay on affected date ranges.
+6. Responsive Design Specifications6. Responsive Design Specifications
+6. Responsive Design Specifications
+6. Responsive Design Specifications
+Mobile-Specific Patterns
+Mobile design is not a simplified desktop. It is a purpose-built experience optimized for the two primary mobile use cases: (1) Morning check-in: review overnight performance, see any automated actions taken. (2) Quick action: approve or undo an automated action from a notification.
+Component
+Desktop Behavior
+Mobile Behavior
+Navigation
+Fixed left sidebar (240px)
+Bottom tab bar with 5 icons. Active indicator is a filled pill behind icon.
+KPI Cards
+4 cards in a row
+Horizontal scrollable row, each card 160px wide, snap-scroll behavior
+Campaign Table
+Full table with all columns
+Simplified card list: Campaign name + Net Profit badge + Spend. Tap to expand inline.
+Charts
+Full-size (240–320px height)
+Compact sparklines only. Full chart accessible via "View full chart" button.
+Date Range Selector
+Top bar dropdown
+Bottom sheet with preset pills (7d, 14d, 30d)
++ calendar date picker
+Right Detail Panel
+Slides in from right (400px wide)
+Full-screen overlay with back button
+Rule Builder
+Multi-column form
+Single-column stacked form, simplified to 3 most common rule types
+Notifications
+Bell icon in top bar
+Full-screen notification list as first-class bottom tab item
+Automation Activity Feed
+Sidebar panel on dashboard
+Swipeable card stack on dashboard mobile view
+Export
+Button triggers download
+Button triggers email delivery to signed-in address (no direct download)
+Touch Interaction Guidelines
+Minimum tap target size: 44×44px (Apple HIG standard).
+Table rows: tap to expand (show inline details). Long-press for context menu (pause, add rule).
+Toggle switches: minimum 48×28px with clear ON/OFF label.
+Swipe right on an activity feed entry: reveals Undo action button.
+Pull-to-refresh triggers a manual sync (rate-limited, same as Sync Now button).
+Bottom sheets instead of dropdowns for all selection UI on mobile.
+Performance Budget (Mobile)
+Metric
+Target
+Measurement Tool
+First Contentful Paint (FCP)
+< 2.0 seconds on 4G
+Lighthouse / WebPageTest
+Largest Contentful Paint (LCP)
+< 2.5 seconds
+Core Web Vitals
+Cumulative Layout Shift (CLS)
+< 0.1
+Core Web Vitals
+Time to Interactive (TTI)
+< 4.0 seconds on 4G
+Lighthouse
+Total bundle size (initial)
+< 200 KB gzipped JS
+Webpack Bundle Analyzer
+Images
+All chart images lazy- loaded, SVG icons inline
+Manual audit
+7. Accessibility Requirements7. Accessibility Requirements
+7. Accessibility Requirements
+7. Accessibility Requirements
+Compliance Target
+PFAM targets WCAG 2.1 Level AA compliance for all primary user journeys. This is both an ethical requirement and a commercial necessity for enterprise sales (many companies require AA compliance in vendor contracts).
+Accessibility Specifications
+Area
+Requirement
+Implementation Notes
+Color Contrast
+All text must meet 4.5:1 contrast ratio (AA). Large text: 3:1.
+Test all semantic colors against their backgrounds. Profit green (#059669) on white (#FFFFFF) = 4.6:1. ✓
+Keyboard Navigation
+All interactive elements reachable by keyboard. Focus order is logical.
+Use native HTML semantics. Tab order follows visual order. Visible focus rings (2px indigo outline).
+Screen Reader Support
+All non-text content has text alternatives. Charts have accessible data tables.
+ARIA labels on icons. Chart data exposed as summary table with aria-hidden on visual chart.
+Semantic Profit Status
+Profit status must not rely on color alone.
+Add text label to all status indicators: ▲ Profitable, ▼ Loss. Not just color dots.
+Form Accessibility
+All form inputs have associated labels. Error messages linked to inputs.
+htmlFor on all labels. aria-describedby for error messages. aria-invalid on error state.
+Motion / Animation
+Respect prefers-reduced- motion. All animations must have a no-motion alternative.
+CSS: @media (prefers-reduced-motion) disables sparkline animations, confetti, slide transitions.
+Timeout Management
+If session expires, user is warned with at least 60 seconds notice.
+Modal at 5-min inactivity: "Your session will expire in 5 minutes. Continue?" with extend/logout.
+Table Accessibility
+Data tables have proper scope and header associations.
+<th scope="col"> on all table headers. caption element on all tables. Summary of table content.
+Notifications
+Alert notifications announced to screen
+role="alert" on toast notifications. Automated action alerts use aria-live="polite".
+Area
+Requirement
+Implementation Notes
+readers without requiring focus.
+Accessibility Testing Plan
+Automated testing: Axe DevTools integrated into CI pipeline. Zero critical violations allowed in any PR.
+Manual testing: All primary user journeys tested with VoiceOver (macOS) and NVDA (Windows) quarterly.
+Keyboard testing: Full journey from login to rule activation completed using keyboard-only monthly.
+Color contrast: All new components submitted with a Figma contrast-check screenshot.
+8. Design Handoff & Engineering Guidelines8. Design Handoff & Engineering Guidelines
+8. Design Handoff & Engineering Guidelines
+8. Design Handoff & Engineering Guidelines
+Component Naming Conventions
+Layer
+Convention
+Example
+Design tokens
+kebab-case
+color.profit.positive, space-4, radius-md
+React component names
+PascalCase
+ProfitBadge, CampaignTable, RuleBuilder
+CSS classes (Tailwind)
+Use design tokens mapped to Tailwind config
+bg-profit-positive, text-brand-primary
+File structure
+Feature-based folders
+src/features/campaigns/CampaignTable.tsx
+Storybook stories
+ComponentName.stories.tsx
+CampaignTable.stories.tsx
+Test files
+ComponentName.test.tsx
+RuleBuilder.test.tsx
+Design-to-Code Workflow
+Designer creates/updates component in Figma. All states documented (default, hover, active, disabled, loading, error, empty).
+Design review: PM + Engineering Lead review in Figma before implementation begins. Edge cases discussed.
+Design tokens exported to a shared tokens.ts file if new tokens are introduced.
+Engineer implements in Storybook first (isolated, all states visible).
+Design QA: Designer reviews Storybook against Figma. Sign-off required before integration.
+Integration QA: Tested in context of the full page on desktop, tablet, and mobile.
+Accessibility check: Axe DevTools run on the integrated page before merge.
+Browser & OS Support
+Platform
+Support Level
+Notes
+Chrome (latest 2 versions)
+Full
+Primary development target
+Safari (latest 2 versions)
+Full
+Required for iOS Safari parity
+Platform
+Support Level
+Notes
+Firefox (latest 2 versions)
+Full
+—
+Edge (latest 2 versions)
+Full
+Chromium-based, low incremental cost
+iOS Safari (iOS 16+)
+Full
+Primary mobile browser
+Android Chrome (latest 2)
+Full
+Primary Android browser
+Chrome < 100, IE11
+Not supported
+Not in our user demographic
+Animation & Motion Guidelines
+Animation Type
+Duration
+Easing
+When to Use
+Page transition (route change)
+150ms
+ease-out
+Navigating between top-level routes
+Panel slide-in (right detail)
+250ms
+ease-out (spring)
+Opening campaign/rule detail panels
+Modal appear
+200ms
+ease-out
+Dialogs, confirmation modals
+Toast notification
+300ms in, 200ms out
+ease-in-out
+Success, error, and info toasts
+Toggle/Switch
+200ms
+ease-in-out
+Rule activation toggle, settings toggles
+Skeleton loader pulse
+1500ms loop
+ease-in-out
+Loading states across all components
+Chart draw
+600ms on first render
+ease-out
+Line charts, bar charts on first mount only
+Number count-up
+800ms
+ease-out
+KPI card values on first load (optional, reduced-motion safe)
+9. Revision History9. Revision History
+9. Revision History
+9. Revision History
+Version
+Date
+Author
+Changes
+1.0
+February 2026
+Product Design + Engineering
+Initial design document. Covers full design system, 7 core screen specifications, interaction patterns, responsive design, accessibility, and handoff guidelines.

@@ -1,0 +1,66 @@
+# PFAM — Cursor Rules
+# Profit-First Ad Manager | Solo Build | Full SRS Implementation
+
+## Project
+Building a multi-tenant SaaS called PFAM (Profit-First Ad Manager).
+D2C e-commerce brands connect Shopify + Meta Ads + Google Ads.
+System calculates true net profit per campaign and automates pausing unprofitable ones.
+
+## Stack
+Frontend: Next.js 14 App Router + TypeScript + Tailwind + shadcn/ui → deployed on Vercel
+Backend: Python 3.12 + FastAPI + SQLAlchemy 2.0 + Alembic → deployed on Railway
+Database: Supabase Postgres (serverless PostgreSQL 15)
+Auth: Clerk (JWT verified in FastAPI via JWKS endpoint)
+Workers: Celery + Upstash Redis (broker)
+Storage: Cloudflare R2 (S3-compatible)
+Email: Resend
+Payments: Stripe
+
+## Core Profit Formula (NEVER deviate from this)
+Net Profit = Attributed Revenue - Ad Spend - Attributed COGS - Estimated Returns - Platform Fees
+All monetary values stored as INTEGER CENTS. Never floats for money.
+Net Profit % = (Net Profit / Attributed Revenue) * 100
+True ROAS = Attributed Revenue / Ad Spend
+
+## 5-Tier Attribution Engine
+Tier 1: Direct click ID match (fbclid/gclid in Shopify UTM params) — confidence 0.95
+Tier 2: Conversion ID match (Meta Pixel / Google Tag event metadata) — confidence 0.85
+Tier 3: SKU-weighted — distribute revenue proportional to campaign spend on matching SKUs — confidence 0.70
+Tier 4: Blended — proportional across all active campaigns by spend volume — confidence 0.50
+Tier 5: ML (XGBoost classifier trained on Tier1/2 ground truth) — confidence 0.60-0.85
+
+## Multi-Tenancy Rules (CRITICAL — never break these)
+Every DB table has org_id UUID column.
+Every query MUST include WHERE org_id = :current_org_id.
+Supabase RLS equivalent: SQLAlchemy always filters by org_id at service layer.
+Never write a query that can return data from multiple organizations.
+
+## Money Rules
+Always store money as integer cents (e.g., $10.50 = 1050).
+Always divide by 100 only at display layer.
+Use Python Decimal for intermediate calculations, not float.
+Never use float arithmetic on monetary values.
+
+## Code Conventions
+Python: snake_case, type hints on all functions, Pydantic v2 for request/response models.
+TypeScript: camelCase, strict mode, no any types.
+All API responses: { data: ..., error: null } or { data: null, error: { code, message } }
+All timestamps: UTC ISO 8601 (e.g., 2026-02-13T10:30:00Z)
+All IDs: UUID v4
+
+## Security Rules
+Never log OAuth tokens, API keys, or PII.
+All platform tokens (Shopify, Meta, Google) stored AES-256 encrypted.
+Idempotency: every sync job must be safe to run twice (upsert, not insert).
+Audit log is append-only — never add UPDATE or DELETE to audit_log table.
+
+## Error Handling
+All external API calls (Shopify, Meta, Google) wrapped in try/except with specific error types.
+Failed sync jobs: retry 3 times with exponential backoff (5min, 15min, 60min).
+Platform API rate limits: raise specific RateLimitError, not generic Exception.
+Never swallow exceptions silently — always log with context.
+
+## Testing
+After building each engine (attribution, profit, rules), write tests matching the SRS test scenarios.
+Profit engine must pass: calculated value within ±1% of manually computed ground truth.
+Attribution Tier 1+2: must correctly attribute ≥92% of orders with known click IDs.

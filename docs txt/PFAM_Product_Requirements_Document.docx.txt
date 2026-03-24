@@ -1,0 +1,365 @@
+PRODUCT REQUIREMENTS DOCUMENT
+Profit-First Ad Manager (PFAM)
+Transform Ad Performance with True Profit Insights
+Version 2.0
+February 2026
+Status: In Development
+Document Information
+Product Name
+Profit-First Ad Manager (PFAM)
+Document Type
+Product Requirements Document
+Version
+2.0
+Date
+February 2026
+Authors
+Product Team
+Status
+Draft — In Development
+Classification
+Confidential
+Executive Summary
+Profit-First Ad Manager (PFAM) is a cloud-hosted SaaS platform that transforms how direct-to-consumer (D2C) e-commerce brands measure and optimize their advertising performance. Unlike traditional tools that focus on vanity metrics like ROAS (Return on Ad Spend), PFAM provides the industry's first profit-first approach to ad management— calculating true net profit by accounting for all costs: ad spend, COGS, returns, and platform fees.
+The Problem
+The digital advertising ecosystem is fundamentally broken for e-commerce brands. Ad platforms optimize for revenue and conversions, completely ignoring the costs that determine actual profitability. A campaign showing 3.5x ROAS might appear healthy, but after accounting for 45% COGS, 12% return rates, and 3% payment fees, the actual net profit margin could be under 5%—or even negative.
+Industry research shows that 60-70% of D2C brands lack real-time per-campaign profitability visibility, and 15-25% of monthly ad spend goes to campaigns that are net-negative when fully loaded costs are considered.
+The Solution
+PFAM solves this by providing:
+Real-time profit calculation: True net profit per campaign, ad set, and SKU using the formula: Revenue - Ad Spend - COGS - Estimated Returns - Platform Fees
+Multi-tiered attribution engine: 5-tier attribution system from direct click ID matching to ML-predicted attribution
+Automated profit-based actions: Rules engine that automatically pauses unprofitable campaigns or scales winners based on profit thresholds
+SKU-level returns modeling: Historical return rates per product applied to profit calculations with retroactive updates
+CEO-friendly dashboards: Red/green profit signals, plain-language insights, mobile-first design for on-the-go monitoring
+Market Opportunity
+With 300,000+ Shopify stores spending over $5K/month on ads, PFAM targets a $1.08B TAM. Our serviceable addressable market (SAM) is $540M focusing on English- speaking markets. A conservative 1% penetration by Year 3 represents $5.4M ARR with 1,500 customers.
+Unique Value Proposition
+PFAM is the only SMB-accessible platform that:
+Executes automated API-level ad actions based on profit thresholds—not just insights
+Models SKU-level returns with retroactive profit adjustments
+Provides transparent profit calculations with confidence scores for every metric
+Offers 10-minute Shopify-first onboarding with zero engineering work required
+Starts at $99/month with ad-spend-tiered pricing designed for growing brands
+Table of Contents
+Product Vision & Strategy
+User Personas & Use Cases
+Core Product Features
+Technical Architecture
+User Experience & Design
+Business Model & Pricing
+Success Metrics & KPIs
+Go-to-Market Strategy
+Development Roadmap
+Risk Assessment & Mitigation
+Appendix
+Product Vision & Strategy
+Vision Statement
+To become the profit intelligence layer for every e-commerce brand, replacing revenue-centric ad optimization with profit-first decision making that actually grows sustainable businesses.
+Mission Statement
+PFAM empowers D2C founders and performance marketers to make confident advertising decisions by providing real-time, accurate profit visibility across all marketing channels—and taking automated action to protect profitability.
+Design Principles
+Principle
+Rationale
+When in Conflict
+Clarity over Cleverness
+A founder at 7am on their phone needs instant comprehension
+Always choose the simpler pattern even if less aesthetically interesting
+Accuracy over Completeness
+A wrong number is worse than a missing one
+Show confidence levels rather than filling gaps with estimates
+Action over Insight
+PFAM must help users do something, not just know something
+Prioritize CTA placement over chart real estate
+Profit as Primary Signal
+Net profit is the dominant visual element on every screen
+ROAS and revenue are context, never primary
+Competitive Positioning
+PFAM differentiates from competitors through three key advantages:
+Automation Execution: Unlike TripleWhale, Northbeam, and Lifetimely (analytics-only), PFAM executes actions via platform APIs
+SMB Accessibility: Starts at $99/month vs $1,000+/month for enterprise attribution tools, with 10-minute setup vs 3-6 months
+Profit Accuracy: Only platform with SKU-level returns modeling and retroactive profit adjustments
+User Personas & Use Cases
+Primary Personas
+Persona 1: The Founder (Alex, 34)
+Role
+CEO/Founder of D2C brand spending $50K/month on ads
+Goals
+Ensure every ad dollar is profitable; sleep knowing bad campaigns are paused automatically; understand true business health at a glance
+Pain Points
+Drowning in dashboards; spends Sunday evenings in Excel; afraid of wasting cash on underperforming campaigns; can't tell which ads actually make money
+PFAM Features
+Account overview dashboard, automation rules, daily email digest, mobile alerts
+Persona 2: The Performance Marketer (Priya, 29)
+Role
+In-house media buyer managing Meta + Google Ads
+Goals
+Optimize campaigns quickly based on profit; justify budget decisions with data; get unified view across platforms
+Pain Points
+Can't get unified profit view across platforms; attribution gaps after iOS 14; ROAS doesn't tell true story; manual campaign management is time-consuming
+PFAM Features
+Campaign detail view, attribution inspector, multi-platform dashboards, automated rules
+Persona 3: The Finance Manager (David, 41)
+Role
+Controller/Accountant at growing D2C brand
+Goals
+Reconcile ad spend with actual profit; export data for accounting system; ensure COGS accuracy
+Pain Points
+Ad metrics don't match P&L; can't link COGS to specific campaigns; manual data collection for month-end close
+PFAM Features
+CSV exports, COGS breakdown reports, reconciliation view, SKU profitability
+Key Use Cases
+UC-01: Onboarding & Platform Connection
+Actor: Founder / Growth Engineer
+Goal: Merchant successfully connects Shopify + Meta, views first profit dashboard within 10 minutes
+Steps:
+Merchant clicks 'Connect Shopify' and completes OAuth flow
+PFAM imports last 90 days of orders, line items, COGS, and refunds
+Merchant connects Meta Ads account via OAuth and selects ad accounts
+PFAM imports last 90 days of campaign and spend data
+Attribution engine runs initial matching pass
+Dashboard populates with profit metrics. Onboarding confirmation email sent
+UC-02: Profit Calculation & Dashboard Review
+Actor: Founder / Performance Marketer
+Goal: Review true net profit per campaign across all connected platforms
+Steps:
+User opens Campaign View and sees all campaigns ranked by net profit
+Each row shows: Revenue, Ad Spend, COGS, Returns, Fees, Net Profit $, Net Profit %, True ROAS
+Color coding provides instant signals: green (profitable), amber (borderline), red (unprofitable)
+User filters by platform, date range, product category, or attribution confidence
+Clicking a campaign opens attribution inspector showing matched orders with confidence scores
+UC-03: Automation Rule Creation
+Actor: Founder / Performance Marketer
+Goal: Create a rule to automatically pause unprofitable ad sets
+Steps:
+User navigates to 'Automation Rules' and clicks 'Create Rule'
+Selects template: 'Pause if unprofitable over rolling window'
+Configures: 7-day rolling window, threshold = net profit < $0, platform = Meta Ads
+Sets guardrails: minimum 15 attributed orders before rule can trigger
+Sets notification channels: email + Slack on trigger
+Activates rule. PFAM validates configuration and displays rule summary
+Core Product Features
+Platform Connectors
+PFAM connects to commerce and advertising platforms via OAuth 2.0 to ingest all data required for profit calculation.
+Shopify Connector (Phase 1)
+OAuth connection with scopes: read_orders, read_products, read_inventory, read_reports
+Historical data import: last 90 days (configurable up to 365 days on Enterprise)
+Real-time sync: new/updated orders ingested within 60 minutes
+Data ingested: orders, line items, COGS (from cost_per_item field), refunds, product metadata
+Multi-currency support: automatic conversion to organization base currency using daily FX rates
+Rate limit management: token bucket algorithm with exponential backoff
+Meta Ads Connector (Phase 1)
+OAuth with scopes: ads_read, ads_management (for pause/budget actions)
+Support for multiple ad accounts per organization
+Data ingested: campaigns, ad sets, ads (IDs, names, status, objectives), daily insights (spend, impressions, clicks, conversions)
+Click-level data import for attribution via fbclid
+Attribution window mapping: Meta 7-day/1-day click windows to PFAM configurable window
+Rate limit handling: error code 17 detection with backoff queuing
+Google Ads Connector (Phase 1)
+OAuth with scope: https://www.googleapis.com/auth/adwords
+Data ingested: campaigns, ad groups, ads, daily metrics (cost, impressions, clicks, conversions), conversion actions
+Google Click ID (gclid) mapping to Shopify order UTM parameters
+Manager Account (MCC) support for agency clients
+API quota management: 10,000 operations/day default with throttling
+TikTok Ads Connector (Phase 2)
+OAuth connection for campaign, ad group, and ad data
+Spend, impressions, clicks, and purchase conversion events
+TikTok Click ID (ttclid) mapping via UTM parameters
+Attribution Engine
+The attribution engine is PFAM's core intellectual property—a 5-tier waterfall system that matches orders to campaigns with transparent confidence scoring.
+Tier
+Method
+Description
+Confidence
+Tier 1
+Direct Click Match
+Match order to ad click using fbclid, gclid, or ttclid in Shopify UTM parameters
+0.95 (95%)
+Tier 2
+Conversion ID Match
+Match Shopify purchase event fired via Meta Pixel/Google Tag to campaign using conversion event metadata
+0.85 (85%)
+Tier 3
+SKU-Weighted
+Distribute revenue across campaigns proportionally to each campaign's share of spend on matching SKUs in attribution window
+0.70 (70%)
+Tier 4
+Blended
+Distribute unmatched revenue proportionally across all active campaigns by spend volume within attribution window
+0.50 (50%)
+Tier 5
+ML-Predicted
+Gradient boosting model trained on Tier 1/2 ground truth using features: order time, SKU category, customer geography, session path
+0.60-0.85 (model- dependent)
+Key Features:
+Configurable attribution window per organization (1, 7, 14, 30-day click window)
+Each attributed order tagged with tier, confidence score (0.0-1.0), and matched click ID
+Conflict resolution: platform priority ranking configurable by user
+Attribution inspector UI: per-order view showing decision path and contributing factors
+Unmatched orders clearly flagged with coverage rate metrics
+Profit Calculation Engine
+PFAM calculates true net profit per campaign, ad set, and ad using the comprehensive formula:
+Net Profit = Revenue - Ad Spend - COGS - Estimated Returns - Platform Fees
+Component Calculations
+Attributed Revenue: Sum of order line-item revenues for orders attributed to the campaign in the window
+Ad Spend: Actual spend ingested from ad platform API for the campaign/window
+Attributed COGS: Sum of (unit_cogs × quantity) for all line items in attributed orders
+Estimated Returns: Sum of (order_revenue × sku_return_rate) for all attributed orders using 180-day trailing return rate
+Estimated Platform Fees: Configurable percentage (default 2.9% + $0.30 per transaction) applied to attributed revenue
+Additional Metrics
+Net Profit Margin: Net Profit / Attributed Revenue × 100
+True ROAS: Attributed Revenue / Ad Spend (always shown for context)
+Blended Metrics: Account-level aggregation across all connected platforms
+Technical Implementation
+All calculations stored as immutable snapshots at each sync cycle with version timestamp
+Historical recalculation triggered automatically when COGS or return rate data is updated
+Metrics available for: daily, 7-day rolling, 14-day rolling, 30-day rolling, custom date range
+All monetary values stored in cents (integer) to avoid floating-point precision issues
+Automation Rules Engine
+The automation engine allows users to define profit-based conditions that trigger automated actions on ad platforms—the key differentiator that sets PFAM apart from analytics-only competitors.
+Rule Components
+Component
+Details
+Platform
+Meta Ads / Google Ads / TikTok Ads (Phase 2)
+Scope
+Account / Campaign / Ad Set (most common) / Ad
+Conditions
+Net profit ($), Net profit margin (%), ROAS, Ad spend, Return cost, Return rate - with operators: <, >, ≤, ≥
+Rolling Windows
+Last 1, 3, 7, 14, or 30 days
+Logic
+AND / OR (max 5 conditions per rule)
+Actions
+Pause entity / Reduce budget by X% / Increase budget by X% / Alert only
+Guardrails
+Min orders (default: 10), Min spend ($50), Max actions/day (10 per account)
+Notifications
+Email / Slack / Webhook / None
+Key Features
+Plain-English Rule Builder: Sentence-like construction: 'IF [7-day net profit] is [less than] [$0] AND [orders] are [more than] [15] THEN pause ad set'
+Backtest Feature: Preview rule behavior against last 30 days of historical data before activation
+Explicit Activation: New rules created in OFF/Draft state; must be explicitly enabled
+Whitelisting: Campaigns or ad sets can be excluded from all automation rules
+One-Click Undo: All automated actions reversible from UI, email, or Slack notification
+Action Execution & Audit Trail
+Actions queued in persistent job queue (Kafka) before execution
+Executed via platform API with OAuth token; API response recorded
+Immutable audit log with: timestamp, actor, action type, entity, platform, rule ID, metric snapshot, API response
+Failed actions retried 3x with exponential backoff; persistent failures trigger admin alert
+Daily action digest email sent to Admin summarizing all automated actions
+Returns & Refund Modeling
+PFAM's returns modeling is a unique feature that dramatically improves profit accuracy by accounting for both expected and actual product returns at the SKU level.
+Return Rate Calculation
+Ingest all Shopify refunds including partial refunds with line-item granularity
+Compute trailing 90-day and 180-day return rate per SKU: returns_rate = refunded_units / sold_units
+Apply return rate to attributed orders: expected_return_cost = order_revenue × sku_return_rate
+Manual override capability: users can set custom return rates per SKU in Product Settings
+Return Lag Adjustment
+PFAM implements a sophisticated two-phase model:
+Phase 1 (Orders < 45 days old): Model expected returns as 'return reserve' (unrealized cost)
+Phase 2 (Orders ≥ 45 days old): Transition from expected to actual return figures
+Retroactive Updates: When actual refund is processed, retroactively update profit metric for the original campaign
+Return Reason Classification
+Returns are classified from Shopify refund notes into categories:
+Defective / Quality Issue
+Wrong Item Shipped
+Customer Changed Mind
+Sizing Issue
+Other
+Note: Defective/Fulfillment returns are flagged separately and not attributed to ad campaign performance
+Dashboards & Reports
+Account Overview Dashboard
+The morning dashboard designed for CEO-level 5-second comprehension:
+KPI Row: Total Net Profit, Ad Spend, Blended Margin %, Campaigns Paused Today (4 metric cards)
+Platform Tiles: One tile per connected platform (Meta, Google, TikTok) showing spend, revenue, net profit, status
+Campaign Health Heatmap: Visual grid of campaigns as colored tiles sized by spend (green=profitable, amber=borderline, red=loss)
+Automation Activity Feed: Timeline of last 10 automated actions with one-click undo
+Sync Status Bar: Last sync time per platform, manual sync trigger, stale data warnings
+Campaign View
+The performance marketer's control center with sortable profit table:
+View Controls: Platform filter, status filter, attribution confidence filter, saved views
+Summary Row: Aggregated totals across filtered campaigns
+Campaign Table: Sortable by net profit (default: worst first), expandable ad set breakdown
+Detail Panel: Slides in on row click showing profit breakdown chart, attribution inspector, 7/14/30-day trends
+Product Profitability View
+SKU-level profit analysis for finance teams:
+Product Table: Image thumbnail, SKU, category, units sold, revenue, COGS, return rate, net margin %
+COGS Source Badge: Indicates data source (Shopify/CSV/Estimate) with confidence color coding
+SKU Profit Trends Panel: 30-day margin % chart, return rate trend, top campaigns driving sales
+Missing COGS Filter: Toggle to show only SKUs requiring COGS configuration
+Report Exports
+Report Type
+Format
+Use Case
+Generation Time
+Campaign Profit Export
+CSV
+Finance reconciliation, month-end close
+< 30 seconds
+Account Summary Report
+PDF
+Board/investor reporting, client reports
+< 60 seconds
+Attribution Detail Export
+CSV
+Attribution audit, engineering debugging
+< 60 seconds
+Automation Activity Report
+PDF
+Compliance, brand safety review
+< 30 seconds
+COGS
+Reconciliation
+CSV
+Finance COGS audit, accounting reconciliation
+< 30 seconds
+Business Model & Pricing
+Revenue Model
+PFAM operates on a subscription SaaS model with tiered pricing based on monthly ad spend. This aligns PFAM's incentives with customer success—as brands scale their advertising, they move up tiers naturally.
+Pricing Tiers
+Plan
+Price/Mo
+Ad Spend
+Users
+Sync
+Rules
+Starter
+$99
+Up to $10K
+1
+Daily
+3
+Growth
+$299
+$10K-$50K
+3
+Hourly
+10
+Pro
+$599
+$50K-
+$150K
+10
+Hourly
+50
+Scale
+$1,299
+$150K-
+$500K
+25
+Real-time
+Unlimited
+Enterprise
+Custom
+$500K+
+Unlimited
+Real-time
+Unlimited
+Additional Notes
+Annual Billing: 15% discount when billed annually
+Ad Spend Calculation: Trailing 30-day sum of spend across all connected ad accounts
+Auto-upgrade Prompt: Shown when ad spend exceeds tier threshold for 3 consecutive days
+Billing via Stripe: Checkout for new subscriptions, Customer Portal for changes/cancellations
+Agency Add-on: +$1,500/month for multi-client dashboard, supports up to 10 client accounts with client-level reporting
+— End of Document —
+For questions or feedback, contact: product@pfam.io
