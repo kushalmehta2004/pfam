@@ -60,10 +60,10 @@ Establish a clean, repeatable project foundation for both frontend and backend s
 - Python 3.12 and Node environment available.
 
 **Acceptance Criteria:**
-- [ ] `GET /health` returns success response.
-- [ ] Frontend boots and protected dashboard route redirects unauthenticated users.
-- [ ] Clerk sign-in/sign-up pages render.
-- [ ] Backend and frontend have environment loading and no startup errors.
+- [x] `GET /health` returns success response.
+- [x] Frontend boots and protected dashboard route redirects unauthenticated users.
+- [x] Clerk sign-in/sign-up pages render.
+- [x] Backend and frontend have environment loading and no startup errors.
 
 **Files/Folders to be created or modified:**
 - `pfam-backend/app/main.py`
@@ -113,9 +113,9 @@ Implement security and data isolation primitives early: org-scoped access on eve
 - Phase 0 complete.
 
 **Acceptance Criteria:**
-- [ ] Unauthorized requests get `401`; unauthorized roles get `403`.
-- [ ] All protected endpoints enforce org scoping.
-- [ ] Role updates and security events append audit entries.
+- [x] Unauthorized requests get `401`; unauthorized roles get `403`.
+- [x] All protected endpoints enforce org scoping.
+- [x] Role updates and security events append audit entries.
 
 **Files/Folders to be created or modified:**
 - `pfam-backend/app/middleware/rbac.py`

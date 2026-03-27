@@ -8,15 +8,22 @@ from sqlalchemy.engine import Connection
 from sqlalchemy.ext.asyncio import async_engine_from_config
 
 from app.config import get_settings
+from app.models.base import Base
+# Import all model modules so Base.metadata contains every table.
+# The order matches FK dependencies (parents before children).
+import app.models  # noqa: F401 — registers all models on Base.metadata
+
 
 config = context.config
 settings = get_settings()
-config.set_main_option("sqlalchemy.url", settings.database_url)
+# ConfigParser treats '%' as interpolation tokens, so escape them for DSNs
+# that contain URL-encoded credentials (e.g. '%40' for '@').
+config.set_main_option("sqlalchemy.url", settings.database_url.replace("%", "%%"))
 
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
-target_metadata = None
+target_metadata = Base.metadata
 
 
 def run_migrations_offline() -> None:
